@@ -19,6 +19,7 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
     protected $hidden = [
+        'slug',
         'created_at',
         'updated_at',
     ];
