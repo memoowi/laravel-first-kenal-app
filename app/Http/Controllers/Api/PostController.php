@@ -12,7 +12,7 @@ class PostController extends Controller
     {
         return response()->json([
             'status' => true,
-            'message' => 'Welcome to the API',
+            'message' => 'Welcome to Post API',
             'data' => Post::with('comments')->get(),
         ]);
     }
