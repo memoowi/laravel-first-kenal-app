@@ -47,18 +47,21 @@ class PostController extends Controller
     }
     public function store2(PostRequest $request)
     {
-        // $post = new Post();
-        // $post->title = $request->title;
-        // $post->content = $request->content;
-        
-        // $post->save();
+        $post = new Post();
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->slug = Str::slug($request->title);
+        if ($request->hasFile('image')) {
+            $post->image = $request->file('image')->store('images-post');
+        }
+        $post->save();
 
-        Post::create([
-            'title' => $request->title,
-            'slug' => Str::slug($request->title),
-            'image' => $request->file('image')->store('images-post'),
-            'content' => $request->content,
-        ]);
+        // Post::create([
+        //     'title' => $request->title,
+        //     'slug' => Str::slug($request->title),
+        //     'image' => $request->file('image')->store('images-post'),
+        //     'content' => $request->content,
+        // ]);
 
         return redirect()->route('posts.index')->with('ok','Data Added Successfully');
         // dd($request->all());
