@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\Helpers\FormatResponse;
 use App\Models\Post;
+use Illuminate\Support\Str;
 
 class PostRepository
 {
@@ -13,26 +14,31 @@ class PostRepository
         return FormatResponse::success($message, $posts);
     }
 
-    public function getById($id)
+    // public function getById($id)
+    // {
+    //     return Post::find($id);
+    // }
+
+    public function store(array $dataPost)
     {
-        return Post::find($id);
+        return Post::create([
+            'title' => $dataPost['title'],
+            'content' => $dataPost['content'],
+            'slug' => Str::slug($dataPost['title']),
+            // 'image' => $dataPost['image'],
+        ]);
     }
 
-    public function create(array $data)
-    {
-        return Post::create($data);
-    }
+    // public function update($id, array $data)
+    // {
+    //     $post = Post::find($id);
+    //     $post->update($data);
+    //     return $post;
+    // }
 
-    public function update($id, array $data)
-    {
-        $post = Post::find($id);
-        $post->update($data);
-        return $post;
-    }
-
-    public function delete($id)
-    {
-        $post = Post::find($id);
-        $post->delete();
-    }
+    // public function delete($id)
+    // {
+    //     $post = Post::find($id);
+    //     $post->delete();
+    // }
 }

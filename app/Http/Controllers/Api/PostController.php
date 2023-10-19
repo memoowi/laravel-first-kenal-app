@@ -19,4 +19,8 @@ class PostController extends Controller
     {
         return $this->postService->getAllPosts();
     }
+    public function store(Request $request)
+    {
+        return $this->postService->storePost($request->all());
+    }
 }
