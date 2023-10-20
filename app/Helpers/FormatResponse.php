@@ -11,7 +11,6 @@ class FormatResponse
             'message' => $message,
             'errors' => $data,
         ]);
-
         $success = response()->json([
             'status' => $status,
             'message' => $message,

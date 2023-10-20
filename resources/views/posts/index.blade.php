@@ -61,7 +61,7 @@
                 <td class="px-6 py-4 whitespace-no-wrap">
                     <a href="{{route('posts.show', $row->slug)}}" class="text-white bg-blue-500 hover:bg-blue-700 p-3 rounded">Details</a>
                     <a href="{{route('posts.edit', $row->id)}}" class="text-white bg-green-500 hover:bg-green-700 p-3 rounded">Edit</a>
-                    <form action="{{route('posts.destroy', $row->id)}}" method="POST" class="inline">
+                    <form id="deleteForm" action="{{route('posts.destroy', $row->id)}}" method="POST" class="inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="text-white bg-red-500 hover:bg-red-700 p-3 rounded">Delete</button>
@@ -100,7 +100,8 @@
     @endif
 
     // delete
-    function deleteData(id){
+    document.getElementById('deleteForm').addEventListener('submit',function deleteData(e){
+        e.preventDefault();
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -111,15 +112,10 @@
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                document.getElementById('delete-form-'+id).submit();
-                Swal.fire(
-                    'Deleted!', 
-                    'Your file has been deleted.',
-                    'success'
-                )
+                this.submit();
             }
-        })
-    }
+        });
+    });
     
 
 </script>

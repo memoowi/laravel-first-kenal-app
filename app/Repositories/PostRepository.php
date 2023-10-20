@@ -40,7 +40,6 @@ class PostRepository
             'title' => $dataPost['title'],
             'content' => $dataPost['content'],
             'slug' => Str::slug($dataPost['title']),
-            // 'image' => $dataPost['image'],
         ]);
         if($image){
             $imagePath = $image->store('images-post');
