@@ -17,10 +17,10 @@ class PostService
         return $this->postRepository->getAll();
     }
 
-    // public function getPostById($id)
-    // {
-    //     return $this->postRepository->getById($id);
-    // }
+    public function getPostById($id)
+    {
+        return $this->postRepository->getById($id);
+    }
 
     public function storePost(array $data, $image)
     {

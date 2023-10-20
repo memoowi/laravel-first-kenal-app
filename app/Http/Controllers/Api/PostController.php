@@ -19,6 +19,10 @@ class PostController extends Controller
     {
         return $this->postService->getAllPosts();
     }
+    public function show($id)
+    {
+        return $this->postService->getPostById($id);
+    }
     public function store(Request $request)
     {
         return $this->postService->storePost($request->all(), $request->file('image'));
