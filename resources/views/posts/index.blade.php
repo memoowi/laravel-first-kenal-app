@@ -61,7 +61,7 @@
                 <td class="px-6 py-4 whitespace-no-wrap">
                     <a href="{{route('posts.show', $row->slug)}}" class="text-white bg-blue-500 hover:bg-blue-700 p-3 rounded">Details</a>
                     <a href="{{route('posts.edit', $row->id)}}" class="text-white bg-green-500 hover:bg-green-700 p-3 rounded">Edit</a>
-                    <form id="deleteForm" action="{{route('posts.destroy', $row->id)}}" method="POST" class="inline">
+                    <form action="{{route('posts.destroy', $row->id)}}" method="POST" class="inline deleteForm">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="text-white bg-red-500 hover:bg-red-700 p-3 rounded">Delete</button>
@@ -86,8 +86,8 @@
 @section('js')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+@if(session('ok'))
 <script>
-    @if(session('ok'))
     newdata();
     function newdata(){
         Swal.fire({
@@ -97,27 +97,29 @@
             cancelButtonColor: '#d33',
         }) 
     }
-    @endif
-
+</script>
+@endif
+<script>
     // delete
-    document.getElementById('deleteForm').addEventListener('submit',function deleteData(e){
-        e.preventDefault();
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: 'grey',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                this.submit();
-            }
+    const deleteForms = document.querySelectorAll('.deleteForm');
+    deleteForms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Are you sure to DELETE this?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: 'grey',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            });
         });
     });
-    
-
 </script>
 
 @endsection
