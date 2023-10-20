@@ -22,9 +22,9 @@ class PostService
     //     return $this->postRepository->getById($id);
     // }
 
-    public function storePost(array $data)
+    public function storePost(array $data, $image)
     {
-        return $this->postRepository->store($data);
+        return $this->postRepository->store($data, $image);
     }
 
     // public function updatePost($id, array $data)

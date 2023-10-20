@@ -19,14 +19,19 @@ class PostRepository
     //     return Post::find($id);
     // }
 
-    public function store(array $dataPost)
+    public function store(array $dataPost, $image)
     {
-        return Post::create([
+        $post = Post::create([
             'title' => $dataPost['title'],
             'content' => $dataPost['content'],
             'slug' => Str::slug($dataPost['title']),
             // 'image' => $dataPost['image'],
         ]);
+        if($image){
+            $imagePath = $image->store('images-post');
+            $post->update(['image' => $imagePath]);
+        }
+        return $post;
     }
 
     // public function update($id, array $data)
