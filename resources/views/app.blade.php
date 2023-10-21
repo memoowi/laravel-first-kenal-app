@@ -9,7 +9,7 @@
   </title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
-<body class="bg-gradient-to-b from-teal-500 to-pink-500 p-32 bg-cover ">
+<body class="bg-gradient-to-b from-teal-500 to-pink-500 p-32 bg-cover h-screen">
     @yield('content')
     @yield('js')
 </body>
