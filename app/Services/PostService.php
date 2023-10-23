@@ -27,10 +27,10 @@ class PostService
         return $this->postRepository->store($data, $image);
     }
 
-    // public function updatePost($id, array $data)
-    // {
-    //     return $this->postRepository->update($id, $data);
-    // }
+    public function updatePost($id, array $data, $image)
+    {
+        return $this->postRepository->update($id, $data, $image);
+    }
 
     // public function deletePost($id)
     // {

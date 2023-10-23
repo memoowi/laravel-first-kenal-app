@@ -48,12 +48,23 @@ class PostRepository
         return $post;
     }
 
-    // public function update($id, array $data)
-    // {
-    //     $post = Post::find($id);
-    //     $post->update($data);
-    //     return $post;
-    // }
+    public function update($id, array $data, $image)
+    {
+        $post = Post::find($id);
+        if($post)
+        {
+            $post->update([
+                'title' => $data['title'],
+                'slug' => Str::slug($data['title']),
+                'content' => $data['content'],
+            ]);
+            if($image)
+            {
+                $imagePath = $image->store('images-post');
+                $post->update(['image' => $imagePath]);
+            }
+        }
+    }
 
     // public function delete($id)
     // {

@@ -27,4 +27,8 @@ class PostController extends Controller
     {
         return $this->postService->storePost($request->all(), $request->file('image'));
     }
+    public function update($id, Request $request)
+    {
+        return $this->postService->updatePost($id, $request->all(), $request->file('image'));
+    }
 }
