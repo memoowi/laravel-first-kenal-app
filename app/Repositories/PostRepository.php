@@ -12,7 +12,17 @@ class PostRepository
     public function getAll()
     {
         $message = 'Welcome to Post API';
-        $posts = Post::with('comments')->get();
+        $posts = Post::with('comments')->get()
+        -> map(function ($posts) {
+            return [
+                'id' => $posts->id,
+                'title' => $posts->title,
+                'content' => $posts->content,
+                'posted_on' => date("l, d F Y", strtotime($posts->created_at)),
+                'updated_at' => $posts->updated_at,
+            ];
+        });
+
         return FormatResponse::success($message, $posts);
     }
 

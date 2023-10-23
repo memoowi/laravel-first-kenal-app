@@ -21,7 +21,7 @@ class Post extends Model
     }
     protected $hidden = [
         'slug',
-        'created_at',
+        // 'created_at',
         'updated_at',
     ];
     protected static function boot()
