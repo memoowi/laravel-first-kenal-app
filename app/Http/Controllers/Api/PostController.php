@@ -31,4 +31,8 @@ class PostController extends Controller
     {
         return $this->postService->updatePost($id, $request->all(), $request->file('image'));
     }
+    public function destroy($id)
+    {
+        return $this->postService->deletePost($id);
+    }
 }

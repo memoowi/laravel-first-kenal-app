@@ -32,8 +32,8 @@ class PostService
         return $this->postRepository->update($id, $data, $image);
     }
 
-    // public function deletePost($id)
-    // {
-    //     $this->postRepository->delete($id);
-    // }
+    public function deletePost($id)
+    {
+        $this->postRepository->delete($id);
+    }
 }

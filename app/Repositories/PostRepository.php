@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\Helpers\FormatResponse;
 use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -60,15 +61,27 @@ class PostRepository
             ]);
             if($image)
             {
+                if(!empty($post->image)){
+                    Storage::delete($post->image);
+                }
                 $imagePath = $image->store('images-post');
                 $post->update(['image' => $imagePath]);
             }
+            return FormatResponse::success('Post Updated', $post);
         }
     }
 
-    // public function delete($id)
-    // {
-    //     $post = Post::find($id);
-    //     $post->delete();
-    // }
+    public function delete($id)
+    {
+        $post = Post::findOrFail($id);
+        // $post->comments()->delete();
+        // if(!empty($post->image)){
+        //     Storage::delete($post->image);
+        // }
+        $post->delete();
+        return response()->json([
+            'status' => true,
+            'message' => 'Post Deleted',
+        ]);
+    }
 }
